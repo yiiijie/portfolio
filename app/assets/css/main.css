@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: #F6EFE6;
+  --color-surface: #FFFDF9;
+  --color-ink: #2A2521;
+  --color-muted: #6A5F57;
+  --color-line: #D9CDBE;
+  --color-accent: #456A9E;
+  --color-night: #141A26;
+  --color-night-line: #33405A;
+
+  --font-sans: "Noto Sans TC", system-ui, sans-serif;
+  --font-num: "Space Grotesk", "Noto Sans TC", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
