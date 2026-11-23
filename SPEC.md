@@ -16,10 +16,20 @@
 | 框架 | Nuxt 4 + TypeScript，`ssr: true`，以 `nuxi generate` 輸出靜態網站 |
 | 內容 | `@nuxt/content`（每個專案一個 Markdown 檔） |
 | 圖片 | `@nuxt/image`（場景圖已是 WebP，主要用於案例頁截圖） |
-| 樣式 | 一般 CSS（scoped + 少量全域變數），不另外加 UI 框架 |
+| 樣式 | Tailwind CSS v4（`@tailwindcss/vite`，與 Scheduler 相同的安裝方式）；不另外加 UI 元件庫 |
 | 動畫 | 先用原型的手寫捲動計算；第 4 階段再評估換成 GSAP ScrollTrigger |
 | 部署 | Cloudflare Pages（建置指令 `npx nuxi generate`，輸出 `.output/public`） |
 | CI | GitHub Actions：lint、typecheck、generate |
+
+## 1.1 Tailwind 使用方式
+
+- 安裝 `tailwindcss` 與 `@tailwindcss/vite`，在 `nuxt.config.ts` 的 `vite.plugins` 加入 `tailwindcss()`，`css` 載入 `~/assets/css/main.css`。
+- `main.css` 以 `@import "tailwindcss";` 開頭，用 `@theme` 定義設計變數：
+  - 顏色：`--color-bg: #F6EFE6`、`--color-surface: #FFFDF9`、`--color-ink: #2A2521`、`--color-muted: #6A5F57`、`--color-line: #D9CDBE`、`--color-accent: #456A9E`；深色區塊 `--color-night: #141A26`、`--color-night-line: #33405A`。
+  - 字體：`--font-sans: "Noto Sans TC", system-ui, sans-serif`、`--font-num: "Space Grotesk", "Noto Sans TC", sans-serif`。
+- 深色模式用 class 策略（`@custom-variant dark (&:where(.dark, .dark *));`），由檯燈切換 `<html>` 的 `dark` class。
+- 版面、間距、文字、按鈕、卡片一律用 Tailwind utility。
+- 以下照原型用 scoped CSS 或 `main.css` 寫，不硬塞進 utility：場景圖層的百分比定位、`matrix3d`、`cqw` 字級、`@keyframes`（呼吸、提示點、愛心）、SVG 濾鏡。
 
 ## 2. 專案結構
 
