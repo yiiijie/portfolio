@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 const THEME_SCRIPT = `(function(){var d;try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')d=s==='dark'}catch(e){}if(d===undefined)d=matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')})()`
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', '@nuxt/content'],
   ssr: true,
   devtools: { enabled: true },
   app: {
@@ -26,6 +26,10 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.css'],
+  content: {
+    // 用 Node 內建的 node:sqlite（Node 22.5+），不需要編譯 better-sqlite3
+    experimental: { sqliteConnector: 'native' },
+  },
   compatibilityDate: '2025-07-15',
   nitro: {
     // 固定輸出到 .output/public；不設定的話在 Cloudflare Pages 上會自動改用

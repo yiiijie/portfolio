@@ -33,21 +33,7 @@ const nav = [
     <main>
       <HeroStoryStage />
 
-      <!-- 第 4 階段：作品列表 -->
-      <section
-        id="works"
-        aria-labelledby="worksTitle"
-        class="px-4 py-24"
-      >
-        <div class="mx-auto max-w-5xl">
-          <h2
-            id="worksTitle"
-            class="text-3xl font-black"
-          >
-            精選作品
-          </h2>
-        </div>
-      </section>
+      <WorksList />
 
       <!-- 第 5 階段：晚上場景、關於我、聯絡 -->
       <section
