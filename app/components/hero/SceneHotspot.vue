@@ -8,12 +8,15 @@ const props = withDefaults(defineProps<{
   dot?: [number, number]
   tip?: string
   tipBelow?: boolean
+  /** tooltip 右緣對齊熱區右緣（靠近畫面右側的物件用，避免超出畫面） */
+  tipRight?: boolean
   /** 觸控時點一下切換 tooltip 顯示 */
   tapTip?: boolean
 }>(), {
   dot: () => [50, 22],
   tip: undefined,
   tipBelow: false,
+  tipRight: false,
   tapTip: false,
 })
 
@@ -49,7 +52,7 @@ function onClick() {
     <span
       v-if="tip"
       class="tip"
-      :class="{ below: tipBelow }"
+      :class="{ below: tipBelow, right: tipRight }"
     >{{ tip }}</span>
   </button>
 </template>
@@ -114,6 +117,11 @@ function onClick() {
   font: 500 clamp(12px, .95cqw, 16px)/1.4 var(--font-sans);
   transition: opacity .18s, transform .18s;
 }
+.tip.right {
+  left: auto;
+  right: 0;
+  transform: translate(0, 6px);
+}
 .tip.below {
   bottom: auto;
   top: calc(100% + 10px);
@@ -123,6 +131,11 @@ function onClick() {
 .hot.on .tip {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+.hot:hover .tip.right,
+.hot:focus-visible .tip.right,
+.hot.on .tip.right {
+  transform: none;
 }
 .zooming .hot {
   pointer-events: none;

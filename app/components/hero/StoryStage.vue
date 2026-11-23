@@ -194,6 +194,7 @@ function onPerson() {
           label="機器人公仔"
           tip="AI 協作夥伴：規格我寫，程式一起寫。"
           tip-below
+          tip-right
           tap-tip
         />
         <!-- 第 3 階段：檯燈切換深色模式（目前只放熱區位置） -->
