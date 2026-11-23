@@ -23,6 +23,11 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-07-15',
+  nitro: {
+    // 固定輸出到 .output/public；不設定的話在 Cloudflare Pages 上會自動改用
+    // cloudflare-pages-static preset，輸出到 dist，與建置設定不符
+    preset: 'static',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
