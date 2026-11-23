@@ -31,20 +31,7 @@ const nav = [
     </header>
 
     <main>
-      <!-- 第 2、3 階段：開場場景 -->
-      <section
-        id="top"
-        aria-label="開場：奕潔的一天"
-        class="relative flex min-h-screen items-center justify-center overflow-hidden"
-      >
-        <img
-          src="/scene/morning.webp"
-          alt=""
-          width="1536"
-          height="1024"
-          class="h-full w-full object-cover"
-        >
-      </section>
+      <HeroStoryStage />
 
       <!-- 第 4 階段：作品列表 -->
       <section
