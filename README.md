@@ -15,5 +15,5 @@
 - `SPEC.md`：開發規格
 - `CLAUDE.md`：給 Claude Code 的專案規則
 - `reference/`：已驗證的原型（瀏覽器直接打開 index.html 需要經過本機伺服器，例如 `npx serve reference`）
-- `assets/scene/`：網頁用的場景圖（WebP）
+- `public/scene/`：網頁用的場景圖（WebP，原本在 `assets/scene/`）
 - `assets/source/`：原始 PNG 與去背、合成用的 Python 腳本（換圖時使用）
