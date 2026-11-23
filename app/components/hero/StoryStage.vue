@@ -22,6 +22,8 @@ const turned = ref(false)
 const zooming = ref(false)
 const f = ref<Frame | null>(null)
 const followAt = ref('translate(0px,0px)')
+/** 推進到底的倍率；右螢幕內容依此先放大排版，推進到底時文字才清楚 */
+const zoomK = ref(1)
 
 const { progress } = useScrollProgress(story)
 
@@ -41,6 +43,7 @@ function measure() {
   const s1 = 1.08 * vw * 1536 / (282 * W)
   const s2 = 1.08 * vh * 1024 / (213 * H)
   S = Math.max(s1, s2, 1.5)
+  zoomK.value = S
 }
 
 function frame(p: number) {
@@ -91,7 +94,9 @@ onMounted(() => {
 onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
 const sceneStyle = computed(() =>
-  f.value ? { left: '0px', top: '0px', transform: f.value.transform } : undefined,
+  f.value
+    ? { 'left': '0px', 'top': '0px', 'transform': f.value.transform, '--zoom-k': zoomK.value.toFixed(4) }
+    : undefined,
 )
 const fade = (v: number | undefined) => (v === undefined ? undefined : { opacity: v })
 
