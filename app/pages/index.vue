@@ -53,7 +53,7 @@ const nav = [
       <section
         id="about"
         aria-labelledby="aboutTitle"
-        class="bg-night px-4 py-24 text-bg"
+        class="bg-night px-4 py-24 text-[#EEE8DF] dark:bg-bg"
       >
         <div class="mx-auto max-w-5xl">
           <h2

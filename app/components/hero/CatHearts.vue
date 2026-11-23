@@ -82,6 +82,10 @@ defineExpose({ pop })
   animation: breathe 3.4s ease-in-out infinite;
   pointer-events: none;
   opacity: 0;
+  transition: filter .6s ease;
+}
+.dark .cat-cut {
+  filter: url(#dimday);
 }
 .cat-cut.purr {
   animation: purr .5s ease-in-out 2;

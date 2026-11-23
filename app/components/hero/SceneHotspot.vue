@@ -89,6 +89,10 @@ function onClick() {
   opacity: 0;
   transform: scale(.4);
 }
+.dark .hot::after {
+  background: #1C2333;
+  box-shadow: 0 0 0 2px rgba(143, 176, 224, .95);
+}
 @keyframes ping {
   0% { box-shadow: 0 0 0 2px rgba(69, 106, 158, .9), 0 0 0 0 rgba(255, 253, 249, .85); }
   70% { box-shadow: 0 0 0 2px rgba(69, 106, 158, .9), 0 0 0 14px rgba(255, 253, 249, 0); }
