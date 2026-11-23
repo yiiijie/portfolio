@@ -26,6 +26,14 @@ const followAt = ref('translate(0px,0px)')
 const zoomK = ref(1)
 
 const { progress } = useScrollProgress(story)
+const { dark, toggle: toggleTheme } = useTheme()
+
+/* 平板：跟著時段（早上關、白天開），直到訪客自己切換 */
+const tabState = ref<boolean | null>(null)
+const tabOn = computed(() => (tabState.value === null ? phase.value === 'day' : tabState.value))
+function toggleTab() {
+  tabState.value = !tabOn.value
+}
 
 // 場景量測（不需要響應式）
 let S = 5, Px = 0, Py = 0, W = 0, H = 0, L = 0, T = 0
@@ -151,6 +159,74 @@ function onPerson() {
       :data-phase="phase"
       @mousemove="onMove"
     >
+      <!-- 關燈：保留當下時段，用濾鏡把房間調暗偏藍（去飽和 0.2 後乘 RGB 增益，再 gamma） -->
+      <svg
+        width="0"
+        height="0"
+        class="absolute"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <filter
+          id="dimday"
+          color-interpolation-filters="sRGB"
+        >
+          <feColorMatrix
+            type="matrix"
+            values="0.2865 0.0486 0.0049 0 0  0.0162 0.3584 0.0055 0 0  0.0264 0.0887 0.5050 0 0  0 0 0 1 0"
+          />
+          <feComponentTransfer>
+            <feFuncR
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.25"
+              offset="0"
+            />
+            <feFuncG
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.25"
+              offset="0"
+            />
+            <feFuncB
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.25"
+              offset="0"
+            />
+          </feComponentTransfer>
+        </filter>
+        <filter
+          id="dimmorning"
+          color-interpolation-filters="sRGB"
+        >
+          <feColorMatrix
+            type="matrix"
+            values="0.2359 0.0401 0.0040 0 0  0.0140 0.3112 0.0048 0 0  0.0264 0.0887 0.5050 0 0  0 0 0 1 0"
+          />
+          <feComponentTransfer>
+            <feFuncR
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.3"
+              offset="0"
+            />
+            <feFuncG
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.3"
+              offset="0"
+            />
+            <feFuncB
+              type="gamma"
+              amplitude="1.35"
+              exponent="1.3"
+              offset="0"
+            />
+          </feComponentTransfer>
+        </filter>
+      </svg>
+
       <div
         ref="scene"
         class="scene"
@@ -166,6 +242,17 @@ function onPerson() {
         <HeroCatHearts
           ref="cat"
           :opacity="f ? f.day : null"
+        />
+        <img
+          class="lamp-night"
+          src="/scene/lamp_night.webp"
+          alt=""
+          width="356"
+          height="440"
+        >
+        <HeroTabletScreen
+          :phase="phase"
+          :on="tabOn"
         />
 
         <HeroSceneHotspot
@@ -184,10 +271,11 @@ function onPerson() {
           label="摸摸貓"
           @click="cat?.pop()"
         />
-        <!-- 第 3 階段：平板開關（目前只放熱區位置） -->
         <HeroSceneHotspot
           :rect="[3.9, 52.2, 16.6, 19.6]"
           label="開關平板"
+          :tip="tabOn ? '點一下關掉平板。' : '點一下打開平板。'"
+          @click="toggleTab"
         />
         <HeroSceneHotspot
           :rect="[85.6, 31.7, 7.4, 14.6]"
@@ -197,11 +285,13 @@ function onPerson() {
           tip-right
           tap-tip
         />
-        <!-- 第 3 階段：檯燈切換深色模式（目前只放熱區位置） -->
         <HeroSceneHotspot
           :rect="[83.5, 45.1, 14.1, 25.4]"
           :dot="[32, 30]"
           label="檯燈：切換深色模式"
+          :aria-pressed="dark"
+          :tip="dark ? '點我開燈，回到淺色模式。' : '點我關燈，切換深色模式。'"
+          @click="toggleTheme"
         />
         <HeroSceneHotspot
           :rect="[57.6, 32.2, 18.7, 22]"
@@ -214,31 +304,31 @@ function onPerson() {
 
       <!-- 標題放在舞台上（不在場景裡），固定在導覽列下方 -->
       <div
-        class="absolute z-[3] left-[clamp(20px,7vw,140px)] top-[clamp(76px,11vh,130px)] text-ink transition-opacity duration-200 ease-linear [text-shadow:0_0_18px_rgba(255,248,240,.9),0_0_4px_rgba(255,248,240,.8)] portrait:left-[6%] portrait:top-[max(76px,calc(50%_-_33.4vw_-_150px))] portrait:w-[88%] w-[min(58vw,820px)] opacity-100 motion-reduce:opacity-0"
+        class="absolute z-[3] left-[clamp(20px,7vw,140px)] top-[clamp(76px,11vh,130px)] text-[#2A2521] transition-opacity duration-200 ease-linear [text-shadow:0_0_18px_rgba(255,248,240,.9),0_0_4px_rgba(255,248,240,.8)] dark:text-[#F1ECE4] dark:[text-shadow:0_0_18px_rgba(10,14,30,.85),0_0_4px_rgba(10,14,30,.8)] portrait:left-[6%] portrait:top-[max(76px,calc(50%_-_33.4vw_-_150px))] portrait:w-[88%] w-[min(58vw,820px)] opacity-100 motion-reduce:opacity-0"
         :style="fade(f?.cap1)"
       >
         <h1 class="m-0 text-[clamp(26px,3.4vw,58px)] leading-[1.2] font-black tracking-[.01em] portrait:text-[28px]">
-          早安，我是奕潔。
+          {{ dark ? '早安，天還沒亮。我是奕潔。' : '早安，我是奕潔。' }}
         </h1>
-        <p class="mt-2.5 text-[clamp(14px,1.2vw,21px)] font-medium text-[#4E4540] portrait:text-[15px]">
+        <p class="mt-2.5 text-[clamp(14px,1.2vw,21px)] font-medium text-[#4E4540] portrait:text-[15px] dark:text-[#C8CFDC]">
           前端工程師，Vue 3 / Nuxt / TypeScript。往下捲，看看我的一天。
         </p>
       </div>
       <div
-        class="absolute z-[3] left-[clamp(20px,7vw,140px)] top-[clamp(76px,11vh,130px)] text-ink transition-opacity duration-200 ease-linear [text-shadow:0_0_18px_rgba(255,248,240,.9),0_0_4px_rgba(255,248,240,.8)] portrait:left-[6%] portrait:top-[max(76px,calc(50%_-_33.4vw_-_150px))] portrait:w-[88%] w-[min(78vw,1100px)] opacity-0 motion-reduce:opacity-100"
+        class="absolute z-[3] left-[clamp(20px,7vw,140px)] top-[clamp(76px,11vh,130px)] text-[#2A2521] transition-opacity duration-200 ease-linear [text-shadow:0_0_18px_rgba(255,248,240,.9),0_0_4px_rgba(255,248,240,.8)] dark:text-[#F1ECE4] dark:[text-shadow:0_0_18px_rgba(10,14,30,.85),0_0_4px_rgba(10,14,30,.8)] portrait:left-[6%] portrait:top-[max(76px,calc(50%_-_33.4vw_-_150px))] portrait:w-[88%] w-[min(78vw,1100px)] opacity-0 motion-reduce:opacity-100"
         aria-hidden="true"
         :style="fade(f?.cap2)"
       >
         <h2 class="m-0 text-[clamp(26px,3.4vw,58px)] leading-[1.2] font-black tracking-[.01em] portrait:text-[28px]">
           專心寫 code 的時候，我做這些東西。
         </h2>
-        <p class="mt-2.5 text-[clamp(14px,1.2vw,21px)] font-medium text-[#4E4540] portrait:text-[15px]">
+        <p class="mt-2.5 text-[clamp(14px,1.2vw,21px)] font-medium text-[#4E4540] portrait:text-[15px] dark:text-[#C8CFDC]">
           滑過畫面裡的東西看看；點螢幕，直接看作品。
         </p>
       </div>
 
       <div
-        class="pointer-events-none absolute top-0 left-0 z-[6] rounded-full border-[1.5px] border-ink bg-surface px-4 py-2 text-[15px] font-bold whitespace-nowrap text-ink transition-opacity duration-150"
+        class="pointer-events-none absolute top-0 left-0 z-[6] rounded-full border-[1.5px] border-[#2A2521] bg-[#FFFDF9] px-4 py-2 text-[15px] font-bold whitespace-nowrap text-[#2A2521] transition-opacity duration-150"
         :class="turned ? 'opacity-100' : 'opacity-0'"
         :style="{ transform: followAt }"
         aria-hidden="true"
@@ -290,6 +380,20 @@ function onPerson() {
   .scene {
     width: 100vw;
   }
+}
+
+.lamp-night {
+  position: absolute;
+  left: 76.823%;
+  top: 41.016%;
+  width: 23.177%;
+  height: 42.969%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease;
+}
+.dark .lamp-night {
+  opacity: 1;
 }
 
 .bob {

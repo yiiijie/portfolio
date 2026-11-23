@@ -18,7 +18,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="layer-group"
+    class="layer-group g-morning"
     :class="{ turned: props.turned }"
   >
     <img
@@ -58,7 +58,7 @@ onMounted(() => {
   </div>
   <img
     ref="turnD"
-    class="layer img-turn"
+    class="layer img-turn turn-d"
     :class="{ show: props.turned && props.phase === 'day' }"
     src="/scene/turn.webp"
     alt=""
@@ -67,7 +67,7 @@ onMounted(() => {
   >
   <img
     ref="turnM"
-    class="layer img-turn"
+    class="layer img-turn turn-m"
     :class="{ show: props.turned && props.phase === 'morning' }"
     src="/scene/turn_morning.webp"
     alt=""
@@ -94,16 +94,26 @@ onMounted(() => {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+  transition: filter .6s ease;
 }
 .hole {
-  transition: opacity .25s ease;
+  transition: opacity .25s ease, filter .6s ease;
+}
+/* 關燈：濾鏡定義在 StoryStage 的 <svg>，依時段選早上或白天那組 */
+.dark .g-day .layer,
+.dark .turn-d {
+  filter: url(#dimday);
+}
+.dark .g-morning .layer,
+.dark .turn-m {
+  filter: url(#dimmorning);
 }
 .turned .hole {
   opacity: 0;
 }
 .img-turn {
   opacity: 0;
-  transition: opacity .25s ease;
+  transition: opacity .25s ease, filter .6s ease;
 }
 .img-turn.show {
   opacity: 1;

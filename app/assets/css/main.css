@@ -18,6 +18,16 @@
   --font-num: "Space Grotesk", "Noto Sans TC", sans-serif;
 }
 
+/* 深色模式（檯燈）：與原型 html.dark 的色票相同 */
+.dark {
+  --color-bg: #141A26;
+  --color-surface: #1C2333;
+  --color-ink: #EEE8DF;
+  --color-muted: #AAB2C2;
+  --color-line: #33405A;
+  --color-accent: #8FB0E0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -27,6 +37,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   line-height: 1.7;
+  transition: background-color .5s, color .5s;
 }
 
 :focus-visible {

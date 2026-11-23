@@ -1,5 +1,8 @@
 import tailwindcss from '@tailwindcss/vite'
 
+// 首次繪製前決定深色模式（記住的選擇優先，否則跟隨系統），避免先亮後暗。鍵名與 useTheme 的 THEME_KEY 相同。
+const THEME_SCRIPT = `(function(){var d;try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')d=s==='dark'}catch(e){}if(d===undefined)d=matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')})()`
+
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   ssr: true,
@@ -11,6 +14,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
+      script: [{ innerHTML: THEME_SCRIPT, tagPosition: 'head' }],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
