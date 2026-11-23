@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* 直式畫面（手機）：與原型的 max-aspect-ratio: 1/1 一致 */
+@custom-variant portrait (@media (max-aspect-ratio: 1/1));
 
 @theme {
   --color-bg: #F6EFE6;
