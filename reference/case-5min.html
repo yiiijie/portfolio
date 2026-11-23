@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>離海 5min 活動住宿官網｜奕潔作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#F6EFE6; --surface:#FFFDF9; --ink:#2A2521; --muted:#6A5F57; --line:#D9CDBE; --accent:#456A9E;
+  --sans:"Noto Sans TC",system-ui,sans-serif; --num:"Space Grotesk","Noto Sans TC",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.8}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:880px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:20px 0}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);text-decoration:none;font-weight:500;font-size:15px}
+.brand{font-weight:900;text-decoration:none}
+
+header.hero{padding:40px 0 32px;border-bottom:2px solid var(--ink)}
+.eyebrow{font:700 13px var(--num);letter-spacing:.16em;color:var(--muted)}
+h1{margin:12px 0 16px;font-weight:900;font-size:clamp(32px,5vw,52px);line-height:1.2}
+.lead{margin:0;font-size:19px;color:var(--muted)}
+.meta{margin:28px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px 32px}
+.meta div{display:flex;flex-direction:column;gap:2px}
+.meta dt{font:700 12px var(--num);letter-spacing:.14em;color:var(--muted)}
+.meta dd{margin:0;font-weight:500}
+
+.media{margin:40px 0 0;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--muted);border-radius:16px}
+.media + figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+
+section{padding:56px 0 0}
+section h2{margin:0 0 16px;display:flex;align-items:baseline;gap:14px;font-weight:900;font-size:clamp(24px,3vw,32px);line-height:1.3}
+section h2 span{font:700 15px var(--num);color:var(--accent)}
+section p{margin:0 0 14px}
+ul.points{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+ul.points li{padding:14px 0;border-top:1px solid var(--line)}
+ul.points li:last-child{border-bottom:1px solid var(--line)}
+ul.points b{display:block;margin-bottom:2px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;padding:1px 6px;border-radius:6px;background:#EDE3D6}
+
+.challenge{display:grid;gap:12px}
+.challenge > div{padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.challenge h3{margin:0 0 6px;font:700 13px var(--num);letter-spacing:.14em;color:var(--muted)}
+.challenge p{margin:0}
+
+.result{display:flex;flex-direction:column;gap:18px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.bar{display:flex;flex-direction:column;gap:6px}
+.bar .row{display:flex;justify-content:space-between;font-size:15px}
+.bar .row b{font-family:var(--num)}
+.track{height:14px;border-radius:7px;background:#EDE3D6;overflow:hidden}
+.track i{display:block;height:100%;border-radius:7px}
+.result small{color:var(--muted);font-size:14px}
+
+.next{margin:72px 0 80px;padding-top:24px;border-top:2px solid var(--ink);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+.next a{display:flex;flex-direction:column;gap:2px;text-decoration:none;min-height:44px}
+.next a span{font:700 12px var(--num);letter-spacing:.14em;color:var(--muted)}
+.next a b{font-size:20px}
+.next a:hover b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="index.html#works">← 回到作品列表</a>
+    <a class="brand" href="index.html">奕潔 Jessica</a>
+  </div>
+
+  <header class="hero">
+    <span class="eyebrow">CASE 02</span>
+    <h1>離海 5min 活動住宿官網</h1>
+    <p class="lead">墾丁水上活動業者的活動與住宿官網。我用 Nuxt 4 從零建置，並把首頁的載入體驗重新整理過一輪。</p>
+    <dl class="meta">
+      <div><dt>ROLE</dt><dd>前端，從零建置</dd></div>
+      <div><dt>PERIOD</dt><dd>2025.12 – 現在</dd></div>
+      <div><dt>STACK</dt><dd>Nuxt 4 · TypeScript · Nuxt Image</dd></div>
+      <div><dt>FOCUS</dt><dd>SSR · SEO · 效能 · CI</dd></div>
+    </dl>
+  </header>
+
+  <figure style="margin:0">
+    <div class="media">[待放：5min 首頁操作錄影，需先取得公司與客戶同意]</div>
+    <figcaption>首頁到活動頁的瀏覽流程。</figcaption>
+  </figure>
+
+  <section aria-labelledby="s1">
+    <h2 id="s1"><span>01</span>專案是什麼</h2>
+    <p>離海是墾丁的水上活動業者。官網讓旅客瀏覽活動與住宿方案，同時是業者在搜尋引擎上被找到的主要入口，所以載入速度和 SEO 都很重要。</p>
+  </section>
+
+  <section aria-labelledby="s2">
+    <h2 id="s2"><span>02</span>我的角色</h2>
+    <p>前端由我從零建置：用 Nuxt 4 + TypeScript 建立專案，開發前台與後台頁面，負責 SSR、SEO、效能，以及部署流程。</p>
+  </section>
+
+  <section aria-labelledby="s3">
+    <h2 id="s3"><span>03</span>我做了什麼</h2>
+    <ul class="points">
+      <li><b>前後台頁面</b>以 Nuxt 4 的 SSR 輸出頁面內容，讓搜尋引擎和使用者第一時間就拿到完整的 HTML。</li>
+      <li><b>SEO 基礎建設</b>建置動態 Sitemap、依環境設定 robots 與是否允許收錄，並完成 Google Search Console 設定。</li>
+      <li><b>效能最佳化</b>重新設計首屏圖片的載入策略，搭配 Nuxt Image、WebP、字型分塊與快取設定。</li>
+      <li><b>自動化建置</b>用 GitHub Actions 建立測試環境的自動建置，並產出部署用的 <code>.output</code>。</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="s4">
+    <h2 id="s4"><span>04</span>一個技術挑戰：首頁主圖載入太慢</h2>
+    <div class="challenge">
+      <div><h3>問題</h3><p>首頁的主圖出現得很慢。分析 Lighthouse 報告後發現，主圖被 <code>&lt;ClientOnly&gt;</code> 包住，沒有出現在伺服器輸出的 HTML 裡，瀏覽器要等 JavaScript 執行完才開始下載這張圖。</p></div>
+      <div><h3>做法</h3><p>把主圖移出 <code>&lt;ClientOnly&gt;</code>，改為直接載入並提高下載優先權（eager loading、fetchpriority），在 head 預先載入，並依螢幕寬度提供不同尺寸的圖片。</p></div>
+      <div><h3>另一個發現</h3><p>中文字型檔案很大，整包載入會拖慢頁面。改成字型分塊，只載入頁面實際用到的字，並設定快取。</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s5">
+    <h2 id="s5"><span>05</span>成果</h2>
+    <div class="result">
+      <div class="bar">
+        <div class="row"><span>中文字型載入量（優化前）</span><b>約 9.3 MB</b></div>
+        <div class="track"><i style="width:100%;background:#B8AA9A"></i></div>
+      </div>
+      <div class="bar">
+        <div class="row"><span>中文字型載入量（優化後）</span><b style="color:var(--accent)">約 300 KB</b></div>
+        <div class="track"><i style="width:3.2%;min-width:8px;background:var(--accent)"></i></div>
+      </div>
+      <small>字型載入量減少約 97%。主圖改由伺服器直接輸出，不必等 JavaScript 執行完才開始下載。</small>
+    </div>
+  </section>
+
+  <nav class="next" aria-label="其他作品">
+    <a href="index.html#works"><span>PREVIOUS</span><b>← Scheduler AI 排班系統</b></a>
+    <a href="index.html#works" style="text-align:right"><span>NEXT</span><b>T-Mamori 資安平台 →</b></a>
+  </nav>
+</div>
+</body>
+</html>
